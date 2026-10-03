@@ -6,9 +6,7 @@ Automated Linux (Ubuntu distro) setup scripts and configurations.
 
 `config/` Contains files mapped to the system `~/.config/` directory.
 
-`home/` Contains files mapped to the system `~/` directory(e.g., .zshrc).
-
-`notes/`: Contains self documentation for installation and setup procedures in a Linux environment.
+`home/` Contains files mapped to the system `~/` directory (e.g., .zshrc).
 
 `scripts/` Automation scripts to configure environment.
 
@@ -35,8 +33,8 @@ Automated Linux (Ubuntu distro) setup scripts and configurations.
 
 | Script | Description |
 |--------|-------------|
-| `install_font.sh` | Installs required fonts (e.g., JetBrainsMono Nerd Font).    |
-| `install_ros2.sh` | Installs ROS 2 and initializes your development workspace.  |
-| `install_zsh.sh`  | Sets up Zsh, Starship, and links core configurations.       |
-| `setup_plugins.sh`| Automatically clones and manages your Zsh plugins.          |  
-
+| `install_font.sh`   | Installs required fonts (e.g., JetBrainsMono Nerd Font).    |
+| `install_ros2.sh`   | Installs ROS 2 and initializes your development workspace.  |
+| `install_zsh.sh`    | Sets up Zsh, Starship, and links core configurations.       |
+| `setup_plugins.sh`  | Automatically clones and manages your Zsh plugins.          |  
+| `uninstall_ros2.sh` | Uninstalls ROS 2 packages and dependencies.                 |
