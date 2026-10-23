@@ -1,7 +1,12 @@
-// LAST UPDATE: FRIDAY, 23 OCTOBER 2026 14:12 P.M. (UTC)
+// LAST UPDATE: FRIDAY, 23 OCTOBER 2026 15:07 P.M. (UTC)
 
 // PATH
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+hotkey-overlay {
+  skip-at-startup
+}
+
 input {
   keyboard {
     xkb {
@@ -225,10 +230,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "waybar"
 
-hotkey-overlay {
-  // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-  // skip-at-startup
-}
+
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -456,3 +458,6 @@ binds {
 // DMS Include Configs
 include "dms/binds.kdl"
 include "dms/cursor.kdl"
+include "dms/layout.kdl"
+include "dms/windowrules.kdl"
+include "dms/input.kdl"
