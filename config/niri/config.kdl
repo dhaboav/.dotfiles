@@ -1,8 +1,8 @@
-// LAST UPDATE: FRIDAY, 23 OCTOBER 2026 15:07 P.M. (UTC)
+// LAST UPDATE: SATURDAY, 24 OCTOBER 2026 05:29 A.M. (UTC)
 
 // PATH
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
+prefer-no-csd
 hotkey-overlay {
   skip-at-startup
 }
@@ -226,20 +226,6 @@ layout {
   }
 }
 
-// Note that running niri as a session supports xdg-desktop-autostart,
-// This line starts waybar, a commonly used bar for Wayland compositors.
-// spawn-at-startup "waybar"
-
-
-
-// Uncomment this line to ask the clients to omit their client-side decorations if possible.
-// If the client will specifically ask for CSD, the request will be honored.
-// Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
-// This option will also fix border/focus ring drawing behind some semitransparent windows.
-// After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
-
-
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -260,6 +246,12 @@ layout {
 }
 
 // ======= Fixed =======
+gestures {
+  hot-corners { 
+    off 
+  }
+}
+
 // picture-in-picture is floating by default (USED on Google-chrome).
 window-rule {
   match title="^Picture in picture$"
@@ -267,34 +259,64 @@ window-rule {
   default-floating-position x=10 y=10 relative-to="top-right"
 }
 
+// Terminal
+window-rule {
+  match app-id="^Alacritty$"
+  opacity 0.80
+  background-effect {
+    blur true
+  }
+}
+
+
 // Note: "Mod" is Super on a TTY, and to Alt on winit window.
 binds {
   // Important
   Mod+Shift+Slash { show-hotkey-overlay; }
+  Mod+Shift+P     { power-off-monitors; }
   Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "lock" "lock"; }
-  Mod+Shift+P { power-off-monitors; }
 
   // ==== CUSTOMIZE APP BINDS ====
-  Mod+T hotkey-overlay-title="Terminal" { spawn "alacritty"; }
-  Mod+B hotkey-overlay-title="Browser" { spawn "google-chrome"; }
-  Mod+D hotkey-overlay-title="Fuzzel (search)" { spawn "fuzzel"; }
+  Mod+T hotkey-overlay-title="Terminal"      { spawn "alacritty"; }
+  Mod+E hotkey-overlay-title="Files"         { spawn "nautilus"; }
+  Mod+Delete hotkey-overlay-title="Trash"    { spawn "nautilus" "trash:///"; }
+  Mod+B hotkey-overlay-title="Browser"       { spawn "google-chrome"; }
+  Mod+D hotkey-overlay-title="Search"        { spawn "dms" "ipc" "call" "spotlight" "open"; }
   Mod+Shift+C hotkey-overlay-title="VS Code" { spawn "code"; }
-  Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "focusOrToggle"; }
+  Mod+Comma hotkey-overlay-title="Settings"  { spawn "dms" "ipc" "call" "settings" "focusOrToggle"; }
   
   // Operation
   Mod+O repeat=false { toggle-overview; }
   Mod+Q repeat=false { close-window; }
 
   // Screenshot
-  Print { screenshot; }
+  Print      { screenshot; }
   Ctrl+Print { screenshot-screen; }
-  Alt+Print { screenshot-window; }
+  Alt+Print  { screenshot-window; }
 
   // Tilling or floating
-  Mod+V { toggle-window-floating; }
+  Mod+V       { toggle-window-floating; }
   Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
-  // window:
+  // window sizing operation
+  Mod+F       { maximize-column; } // Fullscreen
+  Mod+Shift+F { fullscreen-window; } // Zen Mode
+
+  Mod+BracketLeft  { consume-or-expel-window-left; }
+  Mod+BracketRight { consume-or-expel-window-right; }
+
+  Mod+W { toggle-column-tabbed-display; } // Tabs vertical stacked
+  Mod+C { consume-window-into-column; }   // Stacked
+  Mod+S { expel-window-from-column; }     // Unstacked
+
+  Mod+Minus { set-column-width "-10%"; }
+  Mod+Equal { set-column-width "+10%"; }
+  Mod+R     { switch-preset-column-width; } // Reset
+
+  Mod+Shift+Minus { set-window-height "-10%"; }
+  Mod+Shift+Equal { set-window-height "+10%"; }
+ 
+  // window actions:
   Mod+Up    { focus-window-up; }
   Mod+Left  { focus-column-left; }
   Mod+Right { focus-column-right; }
@@ -304,6 +326,9 @@ binds {
   Mod+Ctrl+Left  { move-column-left; }
   Mod+Ctrl+Right { move-column-right; }
   Mod+Ctrl+Down  { move-window-down; }
+
+  Mod+M       { move-window-to-workspace-down; } // Minimize Replacement
+  Mod+Shift+M { move-window-to-workspace-up; }
 
   // workspaces
   Mod+1 { focus-workspace 1; }
@@ -328,14 +353,16 @@ binds {
 
   // ==== SYSTEM BINDS====
   // Brightness Controls
-  XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+  XF86MonBrightnessUp allow-when-locked=true   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
   XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
 
   // Audio Controls
   XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
   XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
-  XF86AudioMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
-  Ctrl+F7 allow-when-locked=true { spawn "dms" "ipc" "call" "mic" "mute" ; } // XF86AudioMicMute not work for some reason?
+  XF86AudioMute allow-when-locked=true        { spawn "dms" "ipc" "call" "audio" "mute"; }
+
+  // XF86AudioMicMute not work for some reason?
+  Ctrl+F7 allow-when-locked=true { spawn "dms" "ipc" "call" "mic" "mute" ; } 
 
   // Media Player
   XF86AudioPlay allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "playPause" ; }
@@ -348,110 +375,16 @@ binds {
   Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
 
   // workspace
-  Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
-  Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+  Mod+WheelScrollUp cooldown-ms=150        { focus-workspace-up; }
+  Mod+WheelScrollDown cooldown-ms=150      { focus-workspace-down; }
   Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
   Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
 
-  // ============== DEFAULTS =========================
-  // Might usefull? =========================
-  Mod+Page_Down      { focus-workspace-down; }
-  Mod+Page_Up        { focus-workspace-up; }
-  Mod+U              { focus-workspace-down; }
-  Mod+I              { focus-workspace-up; }
-  // Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-  Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-
-  // UNUSED BINDS ===============================================
-  // Alternative commands that move across workspaces when reaching
-  // the first or last window in a column.
-  // Mod+J     { focus-window-or-workspace-down; }
-  // Mod+K     { focus-window-or-workspace-up; }
-  // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-  // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
-
-  // Mod+Home { focus-column-first; }
-  // Mod+End  { focus-column-last; }
-  // Mod+Ctrl+Home { move-column-to-first; }
-  // Mod+Ctrl+End  { move-column-to-last; } 
-  
-  // ======== UNTOUCHABLE ================
-  // Alternatively, there are commands to move just a single window:
-  Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-  Mod+Shift+Page_Down { move-workspace-down; }
-  Mod+Shift+Page_Up   { move-workspace-up; }
-  Mod+Shift+U         { move-workspace-down; }
-  Mod+Shift+I         { move-workspace-up; }
-
-  // The following binds move the focused window in and out of a column.
-  // If the window is alone, they will consume it into the nearby column to the side.
-  // If the window is already in a column, they will expel it out.
-  Mod+BracketLeft  { consume-or-expel-window-left; }
-  Mod+BracketRight { consume-or-expel-window-right; }
-
-  // Consume one window from the right to the bottom of the focused column.
-  // Mod+Comma  { consume-window-into-column; }
-  // Expel the bottom window from the focused column to the right.
-  Mod+Period { expel-window-from-column; }
-
-  // Cycle through widths set in preset-column-widths.
-  Mod+R { switch-preset-column-width; }
-  // Cycling through the presets in reverse order is also possible.
-  Mod+Shift+R { switch-preset-column-width-back; }
-
-  Mod+Ctrl+Shift+R { switch-preset-window-height; }
-  Mod+Ctrl+R { reset-window-height; }
-
-  Mod+F { maximize-column; }
-  Mod+Shift+F { fullscreen-window; }
-
-  // While maximize-column leaves gaps and borders around the window,
-  // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
-  // This bind corresponds to normal window maximizing,
-  // e.g. by double-clicking on the titlebar.
-  Mod+M { maximize-window-to-edges; }
-
-  // Expand the focused column to space not taken up by other fully visible columns.
-  // Makes the column "fill the rest of the space".
-  Mod+Ctrl+F { expand-column-to-available-width; }
-
-  Mod+C { center-column; }
-
-  // Center all fully visible columns on screen.
-  Mod+Ctrl+C { center-visible-columns; }
-
-  // Finer width adjustments.
-  // This command can also:
-  // * set width in pixels: "1000"
-  // * adjust width in pixels: "-5" or "+5"
-  // * set width as a percentage of screen width: "25%"
-  // * adjust width as a percentage of screen width: "-10%" or "+10%"
-  // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
-  // set-column-width "100" will make the column occupy 200 physical screen pixels.
-  Mod+Minus { set-column-width "-10%"; }
-  Mod+Equal { set-column-width "+10%"; }
-
-  // Finer height adjustments when in column with other windows.
-  Mod+Shift+Minus { set-window-height "-10%"; }
-  Mod+Shift+Equal { set-window-height "+10%"; }
-
-  // Toggle tabbed column display mode.
-  // Windows in this column will appear as vertical tabs,
-  // rather than stacked on top of each other.
-  Mod+W { toggle-column-tabbed-display; }
-
-  // Applications such as remote-desktop clients and software KVM switches may
-  // request that niri stops processing the keyboard shortcuts defined here
-  // so they may, for example, forward the key presses as-is to a remote machine.
-  // It's a good idea to bind an escape hatch to toggle the inhibitor,
-  // so a buggy application can't hold your session hostage.
-  //
-  // The allow-inhibiting=false property can be applied to other binds as well,
-  // which ensures niri always processes them, even when an inhibitor is active.
+  // REMOTE DESKTOP (Rarely used)
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-  // The quit action will show a confirmation dialog to avoid accidental exits.
-  Mod+Shift+E { quit; }
+  // Session Quit
+  Mod+Shift+E     { quit; }
   Ctrl+Alt+Delete { quit; }
 }
 
