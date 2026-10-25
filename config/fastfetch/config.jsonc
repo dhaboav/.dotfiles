@@ -1,0 +1,128 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "display": {
+    "key": {
+      "width": 11
+    },
+    "separator": " "
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "\u001b[36m╭─────────────────────── SOFTWARE ─────────────────────────╮"
+    },
+    {
+      "type": "os",
+      "key": "│OS",
+      "keyColor": "cyan",
+      "format": "{name} {version}"
+    },
+    {
+      "type": "kernel",
+      "key": "│Kernel",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "shell",
+      "key": "│Shell",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "terminal",
+      "key": "│Terminal",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "de",
+      "key": "│DE",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "wm",
+      "key": "│WM",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "lm",
+      "key": "│LM",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "packages",
+      "key": "│Packages",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[36m╰──────────────────────────────────────────────────────────╯"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[35m╭─────────────────────── HARDWARE ─────────────────────────╮"
+    },
+    {
+      "type": "host",
+      "key": "│Model",
+      "keyColor": "magenta",
+      "format": "{name}"
+    },
+    {
+      "type": "cpu",
+      "key": "│CPU",
+      "keyColor": "magenta",
+      "format": "{name} @ {freq-max}"
+    },
+    {
+      "type": "gpu",
+      "key": "│GPU {index}",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "memory",
+      "key": "│Memory",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "disk",
+      "key": "│Disk {index}",
+      "keyColor": "magenta",
+      "format": "{size-used} / {size-total} ({size-percentage})"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[35m╰──────────────────────────────────────────────────────────╯"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[32m╭──────────────────────── SYSTEM ──────────────────────────╮"
+    },
+    {
+      "type": "title",
+      "key": "│Whoami",
+      "keyColor": "green",
+      "format": "{user-name}@{host-name}"
+    },
+    {
+      "type": "command",
+      "key": "│OS Age",
+      "keyColor": "green",
+      "text": "b=$(stat -c %Y /var/log/installer/syslog 2>/dev/null || stat -c %Y /var/log/installer); printf '%s (%d days ago)' \"$(date -d @$b +%F)\" \"$(( ($(date +%s)-b)/86400 ))\" || echo unknown"
+    },
+    {
+      "type": "uptime",
+      "key": "│Uptime",
+      "keyColor": "green"
+    },
+    {
+      "type": "localip",
+      "key": "│Local IP",
+      "keyColor": "green"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[32m╰──────────────────────────────────────────────────────────╯"
+    }
+  ]
+}
