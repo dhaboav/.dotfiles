@@ -1,73 +1,33 @@
-// LAST UPDATE: SATURDAY, 24 OCTOBER 2026 05:29 A.M. (UTC)
+// LAST UPDATE: SUNDAY, 25 OCTOBER 2026 09:48 A.M. (UTC)
 
-// PATH
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// Important Setup
 prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// Note that running niri as a session supports xdg-desktop-autostart, which may be more convenient to use.
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+}
 hotkey-overlay {
   skip-at-startup
+}
+config-notification {
+  disable-failed
+}
+gestures {
+  hot-corners {
+    off
+  }
 }
 
 input {
   keyboard {
     xkb {
-    // You can set rules, model, layout, variant and options.
-    // For more information, see xkeyboard-config(7).
-
-    // For example:
-    // layout "us,ru"
-    // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-
-    // If this section is empty, niri will fetch xkb settings
-    // from org.freedesktop.locale1. You can control these using
-    // localectl set-x11-keymap.
     }
-
-    // Enable numlock on startup, omitting this setting disables it.
-    numlock
   }
-
-  // Next sections include libinput settings.
-  // Omitting settings disables them, or leaves them at their default values.
-  // All commented-out settings here are examples, not defaults.
-  touchpad {
-    // off
-    tap
-    // dwt
-    // dwtp
-    // drag false
-    // drag-lock
-    natural-scroll
-    // accel-speed 0.2
-    // accel-profile "flat"
-    // scroll-method "two-finger"
-    // disabled-on-external-mouse
-  }
-
-  mouse {
-    // off
-    // natural-scroll
-    // accel-speed 0.2
-    // accel-profile "flat"
-    // scroll-method "no-scroll"
-  }
-
-  trackpoint {
-    // off
-    // natural-scroll
-    // accel-speed 0.2
-    // accel-profile "flat"
-    // scroll-method "on-button-down"
-    // scroll-button 273
-    // scroll-button-lock
-    // middle-emulation
-  }
-
   // Uncomment this to make the mouse warp to the center of newly focused windows.
   // warp-mouse-to-focus
-
-  // Focus windows and outputs automatically when moving the mouse into them.
-  // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-  // focus-follows-mouse max-scroll-amount="0%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -104,17 +64,9 @@ input {
   // automatically.
   position x=1280 y=0
 }
-
 layout {
-  // Fixed ================
-  gaps 8
-  focus-ring {
-    width 3
-    active-color "#7A9BB8"
-  }
-  // ======================
-
-  // Defaults ============================================
+  // Set gaps around windows in logical pixels.
+  background-color "transparent"
   // When to center a column when changing focus, options are:
   // - "never", default behavior, focusing an off-screen column will keep at the left
   //   or right edge of the screen.
@@ -122,7 +74,6 @@ layout {
   // - "on-overflow", focusing a column will center it if it doesn't fit
   //   together with the previously focused column.
   center-focused-column "never"
-
   // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
   preset-column-widths {
     // Proportion sets the width as a fraction of the output width, taking gaps into account.
@@ -131,19 +82,15 @@ layout {
     proportion 0.33333
     proportion 0.5
     proportion 0.66667
-
     // Fixed sets the width in logical pixels exactly.
     // fixed 1920
   }
-
-  // You can also customize the heights that "switch-preset-window-height" (Mod+Ctrl+Shift+R) toggles between.
+  // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
   // preset-window-heights { }
-
   // You can change the default width of the new windows.
   default-column-width { proportion 0.5; }
   // If you leave the brackets empty, the windows themselves will decide their initial width.
   // default-column-width {}
-
   // By default focus ring and border are rendered as a solid background rectangle
   // behind windows. That is, they will show up through semitransparent windows.
   // This is because windows using client-side decorations can have an arbitrary shape.
@@ -154,243 +101,121 @@ layout {
   //
   // Alternatively, you can override it with a window rule called
   // `draw-border-with-background`.
-
-  // You can also add a border. It's similar to the focus ring, but always visible.
   border {
-    // The settings are the same as for the focus ring.
-    // If you enable the border, you probably want to disable the focus ring.
     off
-
     width 4
-    active-color "#ffc87f"
-    inactive-color "#505050"
-
-    // Color of the border around windows that request your attention.
-    urgent-color "#9b0000"
-
-    // Gradients can use a few different interpolation color spaces.
-    // For example, this is a pastel rainbow gradient via in="oklch longer hue".
-    //
-    // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-
-    // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    active-color   "#707070"      // Neutral gray
+    inactive-color "#d0d0d0"      // Light gray
+    urgent-color   "#cc4444"      // Softer red
   }
-
-  // You can enable drop shadows for windows.
   shadow {
-    // Uncomment the next line to enable shadows.
-    // on
-
-    // By default, the shadow draws only around its window, and not behind it.
-    // Uncomment this setting to make the shadow draw behind its window.
-    //
-    // Note that niri has no way of knowing about the CSD window corner
-    // radius. It has to assume that windows have square corners, leading to
-    // shadow artifacts inside the CSD rounded corners. This setting fixes
-    // those artifacts.
-    //
-    // However, instead you may want to set prefer-no-csd and/or
-    // geometry-corner-radius. Then, niri will know the corner radius and
-    // draw the shadow correctly, without having to draw it behind the
-    // window. These will also remove client-side shadows if the window
-    // draws any.
-    //
-    // draw-behind-window true
-
-    // You can change how shadows look. The values below are in logical
-    // pixels and match the CSS box-shadow properties.
-
-    // Softness controls the shadow blur radius.
     softness 30
-
-    // Spread expands the shadow.
     spread 5
-
-    // Offset moves the shadow relative to the window.
     offset x=0 y=5
-
-    // You can also change the shadow color and opacity.
     color "#0007"
   }
-
-  // Struts shrink the area occupied by windows, similarly to layer-shell panels.
-  // You can think of them as a kind of outer gaps. They are set in logical pixels.
-  // Left and right struts will cause the next window to the side to always be visible.
-  // Top and bottom struts will simply add outer gaps in addition to the area occupied by
-  // layer-shell panels and regular gaps.
   struts {
-    // left 64
-    // right 64
-    // top 64
-    // bottom 64
   }
 }
 
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-  match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-  block-out-from "screen-capture"
-
-  // Use this instead if you want them visible on third-party screenshot tools.
-  // block-out-from "screencast"
+layer-rule {
+  match namespace="^quickshell$"
+  place-within-backdrop true
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+overview {
+  workspace-shadow {
+    off
+  }
+}
+
+animations {
+  workspace-switch {
+    spring damping-ratio=0.80 stiffness=523 epsilon=0.0001
+  }
+  window-open {
+    duration-ms 150
+    curve "ease-out-expo"
+  }
+  window-close {
+    duration-ms 150
+    curve "ease-out-quad"
+  }
+  horizontal-view-movement {
+    spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
+  }
+  window-movement {
+    spring damping-ratio=0.75 stiffness=323 epsilon=0.0001
+  }
+  window-resize {
+    spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
+  }
+  config-notification-open-close {
+    spring damping-ratio=0.65 stiffness=923 epsilon=0.001
+  }
+  screenshot-ui-open {
+    duration-ms 200
+    curve "ease-out-quad"
+  }
+  overview-open-close {
+    spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
+  }
+}
+
+window-rule {
+  match app-id=r#"^org\.gnome\."#
+  draw-border-with-background false
   geometry-corner-radius 12
   clip-to-geometry true
 }
-
-// ======= Fixed =======
-gestures {
-  hot-corners { 
-    off 
+window-rule {
+  match app-id=r#"^gnome-control-center$"#
+  match app-id=r#"^pavucontrol$"#
+  match app-id=r#"^nm-connection-editor$"#
+  default-column-width { proportion 0.5; }
+  open-floating false
+}
+window-rule {
+  match app-id=r#"^org\.gnome\.Calculator$"#
+  match app-id=r#"^gnome-calculator$"#
+  match app-id=r#"^galculator$"#
+  match app-id=r#"^blueman-manager$"#
+  match app-id=r#"^xdg-desktop-portal$"#
+  open-floating true
+}
+window-rule {
+  match app-id=r#"^steam$"# title=r#"^notificationtoasts_\d+_desktop$"#
+  default-floating-position x=10 y=10 relative-to="bottom-right"
+  open-focused false
+}
+window-rule {
+  match app-id="Alacritty"
+  draw-border-with-background false
+  opacity 0.85
+  background-effect {
+    blur true 
   }
 }
-
-// picture-in-picture is floating by default (USED on Google-chrome).
 window-rule {
-  match title="^Picture in picture$"
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  match title="^Picture in picture$" // google-chrome
+  match app-id="zoom"
   open-floating true
   default-floating-position x=10 y=10 relative-to="top-right"
 }
-
-// Terminal
-window-rule {
-  match app-id="^Alacritty$"
-  opacity 0.80
-  background-effect {
-    blur true
-  }
+debug {
+  honor-xdg-activation-with-invalid-serial
 }
 
+// Include customize file
+include "binds.kdl"
 
-// Note: "Mod" is Super on a TTY, and to Alt on winit window.
-binds {
-  // Important
-  Mod+Shift+Slash { show-hotkey-overlay; }
-  Mod+Shift+P     { power-off-monitors; }
-  Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "lock" "lock"; }
-
-  // ==== CUSTOMIZE APP BINDS ====
-  Mod+T hotkey-overlay-title="Terminal"      { spawn "alacritty"; }
-  Mod+E hotkey-overlay-title="Files"         { spawn "nautilus"; }
-  Mod+Delete hotkey-overlay-title="Trash"    { spawn "nautilus" "trash:///"; }
-  Mod+B hotkey-overlay-title="Browser"       { spawn "google-chrome"; }
-  Mod+D hotkey-overlay-title="Search"        { spawn "dms" "ipc" "call" "spotlight" "open"; }
-  Mod+Shift+C hotkey-overlay-title="VS Code" { spawn "code"; }
-  Mod+Comma hotkey-overlay-title="Settings"  { spawn "dms" "ipc" "call" "settings" "focusOrToggle"; }
-  
-  // Operation
-  Mod+O repeat=false { toggle-overview; }
-  Mod+Q repeat=false { close-window; }
-
-  // Screenshot
-  Print      { screenshot; }
-  Ctrl+Print { screenshot-screen; }
-  Alt+Print  { screenshot-window; }
-
-  // Tilling or floating
-  Mod+V       { toggle-window-floating; }
-  Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-
-  // window sizing operation
-  Mod+F       { maximize-column; } // Fullscreen
-  Mod+Shift+F { fullscreen-window; } // Zen Mode
-
-  Mod+BracketLeft  { consume-or-expel-window-left; }
-  Mod+BracketRight { consume-or-expel-window-right; }
-
-  Mod+W { toggle-column-tabbed-display; } // Tabs vertical stacked
-  Mod+C { consume-window-into-column; }   // Stacked
-  Mod+S { expel-window-from-column; }     // Unstacked
-
-  Mod+Minus { set-column-width "-10%"; }
-  Mod+Equal { set-column-width "+10%"; }
-  Mod+R     { switch-preset-column-width; } // Reset
-
-  Mod+Shift+Minus { set-window-height "-10%"; }
-  Mod+Shift+Equal { set-window-height "+10%"; }
- 
-  // window actions:
-  Mod+Up    { focus-window-up; }
-  Mod+Left  { focus-column-left; }
-  Mod+Right { focus-column-right; }
-  Mod+Down  { focus-window-down; }
-  
-  Mod+Ctrl+Up    { move-window-up; }
-  Mod+Ctrl+Left  { move-column-left; }
-  Mod+Ctrl+Right { move-column-right; }
-  Mod+Ctrl+Down  { move-window-down; }
-
-  Mod+M       { move-window-to-workspace-down; } // Minimize Replacement
-  Mod+Shift+M { move-window-to-workspace-up; }
-
-  // workspaces
-  Mod+1 { focus-workspace 1; }
-  Mod+2 { focus-workspace 2; }
-  Mod+3 { focus-workspace 3; }
-  Mod+4 { focus-workspace 4; }
-  Mod+5 { focus-workspace 5; }
-  Mod+6 { focus-workspace 6; }
-  Mod+7 { focus-workspace 7; }
-  Mod+8 { focus-workspace 8; }
-  Mod+9 { focus-workspace 9; }
-  
-  Mod+Ctrl+1 { move-column-to-workspace 1; }
-  Mod+Ctrl+2 { move-column-to-workspace 2; }
-  Mod+Ctrl+3 { move-column-to-workspace 3; }
-  Mod+Ctrl+4 { move-column-to-workspace 4; }
-  Mod+Ctrl+5 { move-column-to-workspace 5; }
-  Mod+Ctrl+6 { move-column-to-workspace 6; }
-  Mod+Ctrl+7 { move-column-to-workspace 7; }
-  Mod+Ctrl+8 { move-column-to-workspace 8; }
-  Mod+Ctrl+9 { move-column-to-workspace 9; }
-
-  // ==== SYSTEM BINDS====
-  // Brightness Controls
-  XF86MonBrightnessUp allow-when-locked=true   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
-
-  // Audio Controls
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
-  XF86AudioMute allow-when-locked=true        { spawn "dms" "ipc" "call" "audio" "mute"; }
-
-  // XF86AudioMicMute not work for some reason?
-  Ctrl+F7 allow-when-locked=true { spawn "dms" "ipc" "call" "mic" "mute" ; } 
-
-  // Media Player
-  XF86AudioPlay allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "playPause" ; }
-
-  // ==== MOUSE BINDS ====
-  // window
-  Mod+Shift+WheelScrollUp        { focus-column-left; }
-  Mod+Shift+WheelScrollDown      { focus-column-right; }
-  Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-  Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-
-  // workspace
-  Mod+WheelScrollUp cooldown-ms=150        { focus-workspace-up; }
-  Mod+WheelScrollDown cooldown-ms=150      { focus-workspace-down; }
-  Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-  Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-
-  // REMOTE DESKTOP (Rarely used)
-  Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-  // Session Quit
-  Mod+Shift+E     { quit; }
-  Ctrl+Alt+Delete { quit; }
-}
-
-// DMS Include Configs
-include "dms/binds.kdl"
-include "dms/cursor.kdl"
-include "dms/layout.kdl"
-include "dms/windowrules.kdl"
-include "dms/input.kdl"
+// Include dms files
+include optional=true "dms/alttab.kdl"
+include optional=true "dms/colors.kdl"
+include optional=true "dms/cursor.kdl"
+include optional=true "dms/input.kdl"
+include optional=true "dms/layout.kdl"
+include optional=true "dms/outputs.kdl"
+include optional=true "dms/windowrules.kdl"
+include optional=true "dms/wpblur.kdl"
