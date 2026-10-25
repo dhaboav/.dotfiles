@@ -1,39 +1,38 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[░▒▓](#585B70)\
-[ 󰕈 ](fg:#11111b bg:#585B70)\
+[ 󰕈 ](fg:#FFFFFF bg:#585B70)\
 $directory\
 [](fg:#585B70 bg:#313244)\
 $git_branch\
 $git_status\
-[](fg:#313244 bg:#1E1E2E)\
+[](fg:#313244 bg:#45475A)\
 $time\
-[](fg:#1E1E2E)\
+[](fg:#45475A)\
 \n$character
 """
 
 [directory]
-style = "fg:#F5E0DC bg:#585B70"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+style = 'fg:#E6E9F0 bg:#585B70'
+format = '[ $path ]($style)'
+truncation_length = 2
+truncation_symbol = '…/'
 
 [git_branch]
-symbol = ""
-style = "fg:#89B4FA bg:#313244"
+symbol = ''
+style = 'fg:#89B4FA bg:#313244'
 format = '[ $symbol $branch(:$remote_branch) ]($style)'
 
 [git_status]
-style = "fg:#F38BA8 bg:#313244"
+style = 'fg:#F38BA8 bg:#313244'
 format = '[$all_status$ahead_behind]($style)'
 
 [time]
 disabled = false
-time_format = "%I:%M %p"
-style = "fg:#94E2D5 bg:#1E1E2E"
-format = "[ 󱑍 $time ]($style)"
+time_format = '%I:%M %p'
+style = 'fg:#94E2D5 bg:#45475A'
+format = '[ 󱑍 $time ]($style )'
 
 [character]
-success_symbol = '[ 󰘍](bold #89B4FA)'
-error_symbol = '[ 󰘍](bold #F38BA8)'
+success_symbol = '[ 󱞩](bold #89B4FA)'
+error_symbol = '[ 󱞩](bold #F38BA8)'
