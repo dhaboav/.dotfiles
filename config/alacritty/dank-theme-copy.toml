@@ -1,0 +1,33 @@
+// Incase dont used DMS anymore <- Delete this if want to use it!
+
+[colors.primary]
+background = '#1e1e2e'
+foreground = '#cdd6f4'
+
+[colors.selection]
+text = '#cdd6f4'
+background = '#55307f'
+
+[colors.cursor]
+text = '#1e1e2e'
+cursor = '#cba6f7'
+
+[colors.normal]
+black   = '#181825'
+red     = '#ff728c'
+green   = '#7bf797'
+yellow  = '#ffdb72'
+blue    = '#b88eea'
+magenta = '#55307f'
+cyan    = '#cba6f7'
+white   = '#f6efff'
+
+[colors.bright]
+black   = '#4b4750'
+red     = '#ff9fb1'
+green   = '#a5ffba'
+yellow  = '#ffe8a5'
+blue    = '#d8b7ff'
+magenta = '#dfc4ff'
+cyan    = '#ead9ff'
+white   = '#fbf8ff'
