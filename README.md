@@ -1,40 +1,78 @@
-# dotfiles
+# Dotfiles
 
-Automated Linux (Ubuntu distro) setup scripts and configurations.
+Automated setup scripts and configuration files for an Ubuntu-based Linux environment.
 
-## 🛠 Directory Overview
+## Compatibility
 
-`config/` Contains files mapped to the system `~/.config/` directory.
+Tested on **Ubuntu 26.04.1 LTS (Resolute Raccoon)** with kernel **Linux 7.0.0-38-generic**.
 
-`home/` Contains files mapped to the system `~/` directory (e.g., .zshrc).
+This setup is tailored to my environment and may require adjustments on other Ubuntu releases, Linux distributions, or kernel versions. Review the scripts and configurations before running them.
 
-`scripts/` Automation scripts to configure environment.
+## Showcase
 
-`config.sh`: Centralized environment variables and shared configurations.
+|       Desktop (Niri + DMS)       |  Terminal (Fastfetch + Starship)   |
+| :------------------------------: | :--------------------------------: |
+| ![Desktop](./assets/desktop.png) | ![Terminal](./assets/terminal.png) |
 
-## 🚀 Getting Started
+## Components
 
-- Prerequisites
+### 1. Core Environment
 
-  Ensure scripts have execution permissions before running them:
-  ```bash
-  chmod +x scripts/*.sh
-  ```
+Run `scripts/install_zsh.sh` to set up the terminal environment:
 
-- Installation
+- Zsh and Starship
+- Nerd Fonts
+- Zsh plugins
+- Configuration symlinks
 
-  To perform a full terminal and environment setup, run the master installation script:
-  ```bash
-  ./scripts/install_zsh.sh
-  ```
-  > Note: You may need to log out and log back in for changes (such as the default shell) to take effect.
+**Optional:** Install Fastfetch and apply the provided configuration using a symlink.
 
-## 📋 Available Scripts
+### 2. Desktop Environment (Optional)
 
-| Script | Description |
-|--------|-------------|
-| `install_font.sh`   | Installs required fonts (e.g., JetBrainsMono Nerd Font).    |
-| `install_ros2.sh`   | Installs ROS 2 and initializes your development workspace.  |
-| `install_zsh.sh`    | Sets up Zsh, Starship, and links core configurations.       |
-| `setup_plugins.sh`  | Automatically clones and manages your Zsh plugins.          |  
-| `uninstall_ros2.sh` | Uninstalls ROS 2 packages and dependencies.                 |
+To replicate my desktop setup, install [DMS](https://duxlabs.dev/docs/getting-started), Niri, and Alacritty by following the official installation instructions.
+
+Apply the provided Niri and Alacritty configurations, then restore the DMS configuration backup:
+
+```bash
+dms restore dms-backup-config
+```
+
+### 3. ROS 2 (Optional)
+
+Use the provided scripts to automate ROS 2 installation, workspace setup, or uninstallation.
+
+## Getting Started
+
+Clone the repository and run the core setup:
+
+```bash
+git clone https://github.com/dhaboav/dotfiles.git
+cd dotfiles
+
+chmod +x scripts/*.sh
+./scripts/install_zsh.sh
+```
+
+Review scripts before running them. Log out and back in if required for shell changes to take effect.
+
+## Repository Structure
+
+```text
+.
+├── assets/     # Screenshots and other assets
+├── config/     # Application configurations (~/.config/)
+├── home/       # Home-directory configurations (~/)
+└── scripts/    # Installation and setup scripts
+```
+
+## Available Scripts
+
+| Script              | Description                                                       |
+| ------------------- | ----------------------------------------------------------------- |
+| `install_zsh.sh`    | Install and configure Zsh, Starship, plugins, and symlinks (Main) |
+| `install_font.sh`   | Install Nerd Fonts                                                |
+| `setup_plugins.sh`  | Clone and manage Zsh plugins                                      |
+| `install_ros2.sh`   | Install ROS 2 and initialize the workspace (standalone)           |
+| `uninstall_ros2.sh` | Uninstall ROS 2 packages and dependencies (standalone)            |
+
+> Note for install_font.sh && setup_plugins.sh are included in install_zsh.sh
