@@ -1,3 +1,5 @@
+// LAST UPDATE: FRIDAY, 30 OCTOBER 2026 01:09 A.M. (UTC)
+
 binds {
   Mod+Shift+Slash    { show-hotkey-overlay; } //--help
   Mod+Shift+E        { quit; } // Exit Niri
@@ -10,11 +12,11 @@ binds {
   Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "lock" "lock"; }
 
   // === Application Launchers ===
-  Mod+T hotkey-overlay-title="Terminal"      { spawn "alacritty"; }
-  Mod+E hotkey-overlay-title="Files"         { spawn "nautilus"; }
-  Mod+Delete hotkey-overlay-title="Trash"    { spawn "nautilus" "trash:///"; }
-  Mod+B hotkey-overlay-title="Browser"       { spawn "google-chrome"; }
-  Mod+Shift+C hotkey-overlay-title="VS Code" { spawn "code"; }
+  Mod+T hotkey-overlay-title="Terminal"    { spawn "alacritty"; }
+  Mod+E hotkey-overlay-title="Files"       { spawn "nautilus"; }
+  Mod+Delete hotkey-overlay-title="Trash"  { spawn "nautilus" "trash:///"; }
+  Mod+B hotkey-overlay-title="Browser"     { spawn "google-chrome"; }
+  Mod+C hotkey-overlay-title="VS Code"     { spawn "code"; }
 
   // === DMS Related Launchers ===
   Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "focusOrToggle"; }
