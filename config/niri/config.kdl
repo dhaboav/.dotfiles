@@ -1,4 +1,4 @@
-// LAST UPDATE: SUNDAY, 25 OCTOBER 2026 09:48 A.M. (UTC)
+// LAST UPDATE: SATURDAY, 31 OCTOBER 2026 02:59 A.M. (UTC)
 
 
 // Important Setup
@@ -199,7 +199,7 @@ window-rule {
 }
 window-rule {
   match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-  match title="^Picture in picture$" // google-chrome
+  // match title="^Picture in picture$" // google-chrome
   match app-id="zoom"
   open-floating true
   default-floating-position x=10 y=10 relative-to="top-right"

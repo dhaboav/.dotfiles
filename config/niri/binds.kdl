@@ -1,4 +1,4 @@
-// LAST UPDATE: FRIDAY, 30 OCTOBER 2026 01:09 A.M. (UTC)
+// LAST UPDATE: SATURDAY, 31 OCTOBER 2026 02:59 A.M. (UTC)
 
 binds {
   Mod+Shift+Slash    { show-hotkey-overlay; } //--help
@@ -15,7 +15,7 @@ binds {
   Mod+T hotkey-overlay-title="Terminal"    { spawn "alacritty"; }
   Mod+E hotkey-overlay-title="Files"       { spawn "nautilus"; }
   Mod+Delete hotkey-overlay-title="Trash"  { spawn "nautilus" "trash:///"; }
-  Mod+B hotkey-overlay-title="Browser"     { spawn "google-chrome"; }
+  Mod+B hotkey-overlay-title="Browser"     { spawn "firefox"; }
   Mod+C hotkey-overlay-title="VS Code"     { spawn "code"; }
 
   // === DMS Related Launchers ===
