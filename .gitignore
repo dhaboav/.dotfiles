@@ -2,4 +2,5 @@
 
 # DMS Related generated files
 config/niri/dms/binds.kdl
+config/niri/dms/binds-next.kdl
 config/alacritty/dank-theme.toml
