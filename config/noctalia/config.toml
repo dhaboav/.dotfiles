@@ -1,0 +1,12 @@
+# NOCTALIA CONFIGURATION
+# Last updated: MONDAY, 09 NOVEMBER 2026 04:06 P.M. (UTC)
+
+[include]
+files = [
+  "user/bar/",
+  "user/lockscreen/",
+  "user/shell/",
+  "user/control-center.toml",
+  "user/system.toml",
+  "user/theme.toml",
+]

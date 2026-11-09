@@ -1,0 +1,15 @@
+[lockscreen]
+edge_smoothness = 0.26
+tint_intensity = 0.24
+transition = [
+    "disc",
+    "fade",
+    "golden",
+    "honeycomb",
+    "melt",
+    "pixel",
+    "stripes",
+    "vortex",
+    "wipe",
+    "zoom"
+]

@@ -1,0 +1,18 @@
+[backdrop]
+enabled = true
+tint_intensity = 0.2
+
+[battery]
+warning_threshold = 30
+
+[bluetooth]
+connection_notifications = true
+
+[brightness]
+minimum_brightness = 0.01
+
+[calendar]
+enabled = true
+
+[nightlight]
+temperature_night = 5400

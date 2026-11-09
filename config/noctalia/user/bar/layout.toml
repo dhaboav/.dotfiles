@@ -1,0 +1,71 @@
+[bar.default]
+background_opacity = 0.5
+margin_ends = 10
+radius = 80
+
+start = [
+  "workspaces",
+  "taskbar",
+]
+
+center = [
+  "clock",
+]
+
+end = [
+  "group:system",
+  "group:network",
+  "group:connectivity",
+  "battery",
+]
+
+# === Network ===
+[[bar.default.capsule_group]]
+id = "network"
+members = [
+  "network_rx",
+  "network_tx",
+]
+
+accordion = false
+accordion_direction = "end"
+border = ""
+border_width = 0.0
+enabled = true
+fill = "scrim"
+opacity = 1.0
+padding = 8.0
+widget_spacing = 8
+
+# === Connectivity ===
+[[bar.default.capsule_group]]
+id = "connectivity"
+members = [
+  "input_volume",
+  "network",
+  "bluetooth",
+]
+
+accordion = false
+accordion_direction = "end"
+border_width = 1.0
+enabled = true
+fill = "on_hover"
+opacity = 0.0
+padding = 6.0
+
+# === System ===
+[[bar.default.capsule_group]]
+id = "system"
+members = [
+  "cpu",
+  "ram",
+]
+
+accordion = false
+accordion_direction = "end"
+border_width = 1.0
+enabled = true
+fill = "scrim"
+opacity = 1.0
+padding = 6.0

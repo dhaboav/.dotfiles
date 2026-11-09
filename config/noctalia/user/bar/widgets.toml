@@ -1,0 +1,76 @@
+# === Left Widgets ===
+
+[widget.workspaces]
+font_scale = 1.0
+hide_when_empty = true
+pill_scale = 0.65
+show_labels = false
+show_tooltip = false
+occupied_color = "primary_container"
+change_color_on_hover = false
+
+[widget.active_window]
+display = "icon_only"
+
+[widget.taskbar]
+group_single_icon_per_app = true
+inactive_opacity = 0.4
+only_active_workspace = true
+show_active_indicator = false
+show_tooltip = false
+
+# === Center Widgets ===
+
+[widget.clock]
+anchor = true
+capsule_foreground = "primary"
+color = "primary"
+font_weight = 700
+format = "{:%-I:%M:%S %p} · {:%a %d}"
+
+# === Right Widgets ===
+
+# System monitoring
+[widget.cpu]
+show_tooltip = false
+visualization = "none"
+
+[widget.ram]
+interactive = false
+stat = "ram_pct"
+visualization = "none"
+
+# Network
+[widget.network]
+show_label = false
+show_tooltip = false
+
+[widget.network_rx]
+glyph = "arrow-down"
+interactive = false
+network_speed_decimal_places = 0
+network_speed_unit = "kb"
+visualization = "none"
+
+[widget.network_tx]
+glyph = "arrow-up"
+interactive = false
+network_speed_unit = "kb"
+visualization = "none"
+
+# Audio
+[widget.input_volume]
+hide_when_inactive = true
+
+[widget.volume]
+device = "input"
+hide_when_inactive = true
+
+# Bluetooth
+[widget.bluetooth]
+hide_when_no_connected_device = true
+
+# Battery
+[widget.battery]
+display_mode = "graphic"
+interactive = false

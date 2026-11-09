@@ -1,0 +1,18 @@
+[shell]
+polkit_agent = true
+
+[shell.launcher]
+categories = false
+layout = "simple"
+show_settings_button = false
+track_usage = false
+width = 600
+
+[shell.panel]
+open_near_click_control_center = true
+session_placement = "floating"
+session_position = "center"
+
+[shell.screenshot]
+directory= "~/Pictures/Screenshots"
+filename_pattern= "screenshot_%Y-%m-%d_%H-%M-%S"

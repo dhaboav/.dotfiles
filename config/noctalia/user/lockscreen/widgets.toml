@@ -1,0 +1,81 @@
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+  "lockscreen-widget-0000000000000001",
+  "lockscreen-login-box@eDP-1",
+  "lockscreen-widget-0000000000000002"
+]
+
+[lockscreen_widgets.grid]
+cell_size = 8
+major_interval = 4
+visible = true
+
+# === Login Box ===
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+box_height = 128.0
+box_width = 720.0
+cx = 968.0
+cy = 660.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "login_box"
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+background_color = "surface_container"
+background_opacity = 0.88
+background_radius = 15.0
+center_password_text = true
+input_opacity = 1.0
+input_radius = 6.0
+layout = "regular"
+show_caps_lock = true
+show_keyboard_layout = true
+show_login_button = true
+show_media = false
+show_password_reveal = true
+show_session_buttons = true
+show_unlock_hint = true
+show_weather = false
+
+# === Main Clock ===
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+box_height = 192.0
+box_width = 760.0
+cx = 960.0
+cy = 412.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "clock"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+background = false
+clock_style = "digital"
+color = "primary"
+font_family = ""
+format = "{:%H:%M:%S}"
+
+# === Date Clock ===
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+box_height = 32.0
+box_width = 256.0
+cx = 960.0
+cy = 500.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "clock"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+background = false
+clock_style = "digital"
+format = "{:%a, %b %d }"

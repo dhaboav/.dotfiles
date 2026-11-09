@@ -1,0 +1,8 @@
+[theme]
+builtin = "Catppuccin"
+mode = "dark"
+shell_mode = "dark"
+source = "builtin"
+
+[theme.templates]
+builtin_ids = [ "alacritty", "niri" ]
