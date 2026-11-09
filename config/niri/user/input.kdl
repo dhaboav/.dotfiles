@@ -1,0 +1,13 @@
+input {
+  keyboard {
+    numlock
+  }
+
+  touchpad {
+    tap
+    dwt
+    natural-scroll
+    accel-speed 0.2
+    scroll-factor 0.2
+  }
+}

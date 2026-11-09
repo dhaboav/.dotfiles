@@ -1,0 +1,10 @@
+layer-rule {
+  background-effect {
+    xray false
+  }
+}
+
+layer-rule {
+  match namespace="^noctalia-backdrop"
+  place-within-backdrop true
+}

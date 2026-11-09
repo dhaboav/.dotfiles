@@ -1,0 +1,79 @@
+binds {
+  // === SYSTEM ===
+  Mod+Ctrl+P hotkey-overlay-title="Power Menu" {
+    spawn-sh "noctalia msg panel-toggle session";
+  }
+
+  // === LAUNCHER ===
+  Mod+Comma hotkey-overlay-title="Settings" {
+    spawn-sh "noctalia msg settings-toggle";
+  }
+
+  Mod+D hotkey-overlay-title="Search" {
+    spawn-sh "noctalia msg panel-toggle launcher";
+  }
+
+  Mod+Y hotkey-overlay-title="Wallpapers" {
+    spawn-sh "noctalia msg panel-toggle wallpaper";
+  }
+
+  Mod+N hotkey-overlay-title="Notifications" {
+    spawn-sh "noctalia msg panel-toggle control-center notifications";
+  }
+
+  Mod+A hotkey-overlay-title="Media Player" {
+    spawn-sh "noctalia msg panel-toggle control-center media";
+  }
+
+  // === BRIGHTNESS ===
+  XF86MonBrightnessUp allow-when-locked=true {
+    spawn-sh "noctalia msg brightness-up";
+  }
+
+  XF86MonBrightnessDown allow-when-locked=true {
+    spawn-sh "noctalia msg brightness-down";
+  }
+
+  // === AUDIO ===
+  XF86AudioRaiseVolume allow-when-locked=true {
+    spawn-sh "noctalia msg volume-up";
+  }
+
+  XF86AudioLowerVolume allow-when-locked=true {
+    spawn-sh "noctalia msg volume-down";
+  }
+
+  XF86AudioMute allow-when-locked=true {
+    spawn-sh "noctalia msg volume-mute";
+  }
+
+  Ctrl+F7 allow-when-locked=true {
+    spawn-sh "noctalia msg mic-mute";
+  }
+
+  // === MEDIA ===
+  XF86AudioPlay allow-when-locked=true {
+    spawn-sh "noctalia msg media toggle";
+  }
+
+  XF86AudioPause allow-when-locked=true {
+    spawn-sh "noctalia msg media toggle";
+  }
+
+  XF86AudioNext allow-when-locked=true {
+    spawn-sh "noctalia msg media next";
+  }
+
+  XF86AudioPrev allow-when-locked=true {
+    spawn-sh "noctalia msg media previous";
+  }
+
+  // === SCREENSHOTS ===
+  Print hotkey-overlay-title="SS-Region" {
+    spawn-sh "noctalia msg screenshot-region";
+  }
+
+  Ctrl+Print hotkey-overlay-title="SS-Full" {
+    spawn-sh "noctalia msg screenshot-fullscreen";
+  }
+}

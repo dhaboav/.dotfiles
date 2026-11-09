@@ -1,0 +1,326 @@
+[backdrop]
+enabled = true
+tint_intensity = 0.19999999552965164
+
+[bar.default]
+background_opacity = 0.4999999888241291
+end = [ "group:g3", "group:g1", "group:g2", "battery" ]
+margin_ends = 10
+radius = 80
+start = [ "workspaces", "taskbar" ]
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    border = ""
+    border_width = 0.0
+    enabled = true
+    fill = "scrim"
+    id = "g1"
+    members = [ "network_rx", "network_tx" ]
+    opacity = 1.0
+    padding = 8.0
+    widget_spacing = 8
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    border_width = 1.0
+    enabled = true
+    fill = "on_hover"
+    id = "g2"
+    members = [ "input_volume", "network", "bluetooth" ]
+    opacity = 0.0
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    border_width = 1.0
+    enabled = true
+    fill = "scrim"
+    id = "g3"
+    members = [ "cpu", "ram" ]
+    opacity = 1.0
+    padding = 6.0
+
+[battery]
+warning_threshold = 30
+
+[bluetooth]
+connection_notifications = true
+
+[brightness]
+minimum_brightness = 0.0099999997764825821
+
+[calendar]
+enabled = true
+
+[control_center]
+hidden_tabs = [ "audio", "monitor", "system", "power", "network", "bluetooth", "weather", "calendar", "screen-time" ]
+show_session_button = false
+show_shortcut_labels = false
+sidebar_section = "none"
+width = 600
+
+    [control_center.calendar]
+    show_events_card = false
+
+    [control_center.media]
+    show_visualizer = false
+
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "dark_mode"
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 8
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[hot_corners.top_left]
+action = "window_switcher"
+
+[lockscreen]
+edge_smoothness = 0.25999999418854713
+tint_intensity = 0.23999999463558197
+transition = [ "disc", "fade", "golden", "honeycomb", "melt", "pixel", "stripes", "vortex", "wipe", "zoom" ]
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-widget-0000000000000001", "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000002" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 8
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 128.0
+    box_width = 720.0
+    cx = 968.0
+    cy = 660.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 15.0
+        center_password_text = true
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = false
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 192.0
+    box_width = 760.0
+    cx = 960.0
+    cy = 412.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        clock_style = "digital"
+        color = "primary"
+        font_family = ""
+        format = "{:%H:%M:%S}"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 32.0
+    box_width = 256.0
+    cx = 960.0
+    cy = 500.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = -0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = false
+        clock_style = "digital"
+        format = "{:%a, %b %d }"
+
+[nightlight]
+temperature_night = 5400
+
+[shell.launcher]
+categories = false
+layout = "simple"
+show_settings_button = false
+track_usage = false
+width = 600
+
+[shell.panel]
+open_near_click_control_center = true
+session_placement = "floating"
+session_position = "center"
+
+[shell.session]
+grid = true
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 0.0
+    enabled = true
+    glyph = "moon"
+    label = "Sleep"
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 0.0
+    enabled = true
+    label = "Restart"
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 0.0
+    enabled = true
+    label = "Power Off"
+    shortcut = "KP_5"
+    variant = "destructive"
+
+[theme]
+builtin = "Catppuccin"
+community_palette = "GruvboxAlt"
+mode = "dark"
+shell_mode = "dark"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "alacritty", "niri" ]
+
+[wallpaper]
+directory = "/data/photos/04-Laptop`s Wallpapers"
+transition = [ "golden" ]
+
+    [wallpaper.default]
+    path = "/data/photos/04-Laptop`s Wallpapers/desktop033.jpg"
+
+    [wallpaper.last]
+    path = "/data/photos/04-Laptop`s Wallpapers/desktop033.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/data/photos/04-Laptop`s Wallpapers/desktop033.jpg"
+
+[widget.active_window]
+display = "icon_only"
+
+[widget.battery]
+display_mode = "graphic"
+interactive = false
+
+[widget.bluetooth]
+hide_when_no_connected_device = true
+
+[widget.clock]
+anchor = true
+capsule_foreground = "primary"
+color = "primary"
+font_weight = 700
+format = "{:%-I:%M:%S %p} · {:%a %d}"
+
+[widget.cpu]
+show_tooltip = false
+visualization = "none"
+
+[widget.input_volume]
+hide_when_inactive = true
+
+[widget.network]
+show_label = false
+show_tooltip = false
+
+[widget.network_rx]
+glyph = "arrow-down"
+interactive = false
+network_speed_decimal_places = 0
+network_speed_unit = "kb"
+visualization = "none"
+
+[widget.network_tx]
+glyph = "arrow-up"
+interactive = false
+network_speed_unit = "kb"
+visualization = "none"
+
+[widget.ram]
+interactive = false
+stat = "ram_pct"
+visualization = "none"
+
+[widget.taskbar]
+group_single_icon_per_app = true
+inactive_opacity = 0.40000000000000002
+only_active_workspace = true
+show_active_indicator = false
+show_tooltip = false
+
+[widget.volume]
+device = "input"
+hide_when_inactive = true
+
+[widget.workspaces]
+change_color_on_hover = false
+font_scale = 1.01
+hide_when_empty = true
+occupied_color = "primary_container"
+pill_scale = 0.65000000000000002
+show_labels = false
+show_tooltip = false

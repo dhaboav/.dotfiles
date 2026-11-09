@@ -60,8 +60,7 @@ Review scripts before running them. Log out and back in if required for shell ch
 ```text
 .
 ├── assets/     # Screenshots and other assets
-├── config/     # Application configurations (~/.config/)
-├── home/       # Home-directory configurations (~/)
+├── config/     # All customize application settings
 └── scripts/    # Installation and setup scripts
 ```
 

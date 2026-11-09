@@ -1,0 +1,7 @@
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+}
+
+debug {
+  honor-xdg-activation-with-invalid-serial
+}

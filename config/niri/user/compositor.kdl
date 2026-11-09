@@ -1,0 +1,25 @@
+// Blur
+blur {
+  passes 3
+  offset 3.3
+}
+
+// Gestures
+gestures {
+  hot-corners {
+    off
+  }
+}
+
+// Overview
+overview {
+  workspace-shadow {
+    off
+  }
+}
+
+recent-windows {
+  highlight {
+    corner-radius 14
+  }
+}

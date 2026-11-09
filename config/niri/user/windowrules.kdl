@@ -1,0 +1,57 @@
+// === NOCTALIA ===
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+
+  default-column-width {
+    fixed 1080
+  }
+
+  default-window-height {
+    fixed 920
+  }
+
+  background-effect {
+    xray false
+  }
+}
+
+// === FLOATING APPLICATIONS ===
+window-rule {
+  match app-id=r#"^(org\.gnome\.Calculator|gnome-calculator|galculator|blueman-manager|xdg-desktop-portal)$"#
+  open-floating true
+}
+
+window-rule {
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  open-floating true
+  default-floating-position x=10 y=10 relative-to="top-right"
+  default-column-width { fixed 480; }
+  default-window-height { fixed 270; }
+}
+
+// === GNOME APPLICATIONS ===
+window-rule {
+  match app-id=r#"^org\.gnome\."#
+  draw-border-with-background false
+  geometry-corner-radius 12
+  clip-to-geometry true
+}
+
+// === TERMINAL ===
+window-rule {
+  match app-id="Alacritty"
+  opacity 0.85
+  draw-border-with-background false
+  background-effect {
+    blur true
+  }
+}
+
+// === DEFAULT WINDOW APPEARANCE ===
+window-rule {
+  tiled-state true
+  geometry-corner-radius 16
+  clip-to-geometry true
+  draw-border-with-background false
+}
