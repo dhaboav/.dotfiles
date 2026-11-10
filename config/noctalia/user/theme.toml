@@ -3,6 +3,14 @@ builtin = "Catppuccin"
 mode = "dark"
 shell_mode = "dark"
 source = "builtin"
+pure_black_dark = true
 
 [theme.templates]
 builtin_ids = [ "alacritty", "niri" ]
+enable_community_templates = false
+
+[wallpaper]
+transition = [ 
+  "golden" ,
+  "melt",
+]

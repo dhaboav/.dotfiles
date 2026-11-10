@@ -1,5 +1,7 @@
 [shell]
 polkit_agent = true
+settings_show_advanced = false
+screen_time_enabled = true
 
 [shell.launcher]
 categories = false
@@ -12,7 +14,10 @@ width = 600
 open_near_click_control_center = true
 session_placement = "floating"
 session_position = "center"
+wallpaper_placement = "floating"
+wallpaper_position = "center"
 
 [shell.screenshot]
 directory= "~/Pictures/Screenshots"
 filename_pattern= "screenshot_%Y-%m-%d_%H-%M-%S"
+copy_to_clipboard = false

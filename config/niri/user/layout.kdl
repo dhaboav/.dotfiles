@@ -1,6 +1,7 @@
 layout {
   gaps 8
   background-color "transparent"
+  always-center-single-column
   center-focused-column "never"
 
   default-column-width {

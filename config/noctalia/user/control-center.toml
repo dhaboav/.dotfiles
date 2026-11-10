@@ -1,4 +1,6 @@
 [control_center]
+sidebar = "full"
+sidebar_section = "compact"
 hidden_tabs = [
     "audio",
     "monitor",
@@ -8,11 +10,9 @@ hidden_tabs = [
     "bluetooth",
     "weather",
     "calendar",
-    "screen-time"
 ]
 show_session_button = false
 show_shortcut_labels = false
-sidebar_section = "none"
 width = 600
 
 [control_center.calendar]
