@@ -1,38 +1,39 @@
 #!/usr/bin/env bash
 
-VERSION="0.0.1"
+VERSION="0.0.2"
 
 # Directories
-DOTSHELL_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGE_DIR="$DOTSHELL_DIR/packages"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+PACKAGE_DIR="$SCRIPT_DIR/packages"
+source "$SCRIPT_DIR/lib/utils.sh"
 
-# Text styles
-if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
-  RESET=$'\033[0m'
-  BOLD=$'\033[1m'
-  BOLD_UNDERLINE=$'\033[1;4m'
-  YELLOW=$'\033[33m'
-  BOLD_RED=$'\033[1;31m'
-else
-  RESET=''
-  BOLD=''
-  BOLD_UNDERLINE=''
-  YELLOW=''
-  BOLD_RED=''
-fi
-
-# Version
 show_version() {
-  printf 'dotshell %s\n' "$VERSION"
+  echo "dotshell ${VERSION}"
 }
 
-# List available packages
-list_packages() {
-  local file
-  local package
-  local found=false
+show_help() {
+  cat <<EOF
+A simple and modular dotfiles manager for the command line.
 
-  printf '%sAvailable packages:%s\n' "$BOLD" "$RESET"
+${BOLD_UNDERLINE}Usage:${RESET} <COMMAND> [PACKAGE]
+
+${BOLD_UNDERLINE}Commands:${RESET}
+  ${BOLD}install${RESET}    Install a package
+  ${BOLD}uninstall${RESET}  Remove a package
+  ${BOLD}status${RESET}     Show package status
+  
+${BOLD_UNDERLINE}Options:${RESET}
+  ${BOLD}-h, --help${RESET}     Print help
+  ${BOLD}-v, --version${RESET}  Print version
+  ${BOLD}--list${RESET}         Print available packages
+
+EOF
+}
+
+show_packages() {
+  local file package name description
+
+  echo "${BOLD_UNDERLINE}Packages:${RESET}"
 
   for file in "$PACKAGE_DIR"/*.sh; do
     [[ -f "$file" ]] || continue
@@ -40,44 +41,27 @@ list_packages() {
     package="${file##*/}"
     package="${package%.sh}"
 
-    printf '  %s\n' "$package"
-    found=true
+    PACKAGE_NAME=""
+    PACKAGE_DESCRIPTION=""
+
+    source "$file"
+
+    name="${PACKAGE_NAME:-$package}"
+    description="${PACKAGE_DESCRIPTION:-No description available.}"
+
+    # Please change the spacing as needed to fit your terminal width
+    printf "  ${BOLD}%-13s${RESET} %s\n" "$name" "$description"
   done
-
-  if [[ "$found" == false ]]; then
-    printf '  No packages available.\n'
-  fi
 }
 
-# Help
-show_help() {
-  cat <<EOF
-A simple and modular dotfiles manager for the command line.
-
-${BOLD_UNDERLINE}Usage:${RESET}
-  dotshell <COMMAND> [PACKAGE]
-
-${BOLD_UNDERLINE}Commands:${RESET}
-  ${BOLD}install${RESET}    Install a package
-  ${BOLD}uninstall${RESET}  Remove a package
-  ${BOLD}status${RESET}     Show package status
-  ${BOLD}list${RESET}       List available packages
-  ${BOLD}help${RESET}       Print this help message
-
-${BOLD_UNDERLINE}Options:${RESET}
-  ${BOLD}-h, --help${RESET}     Print help
-  ${BOLD}-v, --version${RESET}  Print version
-
-EOF
-
-  list_packages
-}
-
-# Error
 show_error() {
-  printf '%serror:%s %s\n' "$BOLD_RED" "$RESET" "$1" >&2
-  printf "For more information, try '%sdotshell --help%s'.\n" \
-    "$BOLD" "$RESET" >&2
+  cat >&2 <<EOF
+${BOLD_RED}error:${RESET} $1
+
+${BOLD_UNDERLINE}Usage:${RESET} <COMMAND> [PACKAGE]
+
+For more information, try '${BOLD}--help${RESET}'.
+EOF
 }
 
 # Execute package
@@ -86,31 +70,34 @@ run_package() {
   local package="$2"
   local package_file
 
-  # Validate package name
-  if [[ ! "$package" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-    show_error "Invalid package name '$package'."
+  for file in "$PACKAGE_DIR"/*.sh; do
+    [[ -f "$file" ]] || continue
+
+    PACKAGE_NAME=""
+    source "$file" || continue
+
+    if [[ "${PACKAGE_NAME,,}" == "${package,,}" ]]; then
+      package_file="$file"
+      break
+    fi
+  done
+
+  if [[ -z "$package_file" ]]; then
+    show_error "Package '$package' not found"
+    echo ""
+    show_packages
     return 1
   fi
 
-  # Locate package
-  package_file="$PACKAGE_DIR/$package.sh"
-
-  if [[ ! -f "$package_file" ]]; then
-    show_error "Package '$package' not found."
-    printf '\n'
-    list_packages
-    return 1
-  fi
-
-  # Load package
+  # Load the selected package
   source "$package_file" || {
-    show_error "Failed to load package '$package'."
+    show_error "Failed to load package '$package'"
     return 1
   }
 
   # Check requested function
   if ! declare -F "$action" >/dev/null; then
-    show_error "Package '$package' does not support '$action'."
+    show_error "Package '$PACKAGE_NAME' does not support '$action'"
     return 1
   fi
 
@@ -120,7 +107,7 @@ run_package() {
 
 # Main entry point
 case "${1:-}" in
-  --help | -h | help)
+  --help | -h)
     show_help
     ;;
 
@@ -128,18 +115,18 @@ case "${1:-}" in
     show_version
     ;;
 
-  list)
-    list_packages
+  --list)
+    show_packages
     ;;
 
   install | uninstall | status)
     if [[ -z "${2:-}" ]]; then
-      show_error "Missing package name."
+      show_error "Missing package name"
       exit 1
     fi
 
     if [[ -n "${3:-}" ]]; then
-      show_error "Unexpected argument '${3}'."
+      show_error "Unexpected argument '${3}' found"
       exit 1
     fi
 
@@ -147,7 +134,7 @@ case "${1:-}" in
     ;;
 
   *)
-    show_error "Unknown command '${1:-}'."
+    show_error "Unexpected argument '${1:-}' found"
     exit 1
     ;;
 esac

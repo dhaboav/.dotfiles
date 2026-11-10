@@ -20,7 +20,6 @@ fi
 
 # Fonts and Starship
 echo "[Master] Installing Fonts and Starship..."
-source "$SCRIPT_DIR/install_font.sh"
 sudo apt install starship
 mkdir -p ~/.config
 ln -sf "$(realpath "$SCRIPT_DIR/../config/starship.toml")" ~/.config/starship.toml
