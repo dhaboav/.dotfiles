@@ -12,7 +12,7 @@ opacity = 1.0
 history = 3023
 
 [font]
-normal = { family="JetBrainsMono Nerd Font", style="Regular"}
+normal = { family="JetBrainsMono NFM", style="Regular"}
 size = 18.0
 
 [cursor]
