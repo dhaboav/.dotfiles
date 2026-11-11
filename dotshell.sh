@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="0.0.4"
+VERSION="1.0.0"
 
 # Directories
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"

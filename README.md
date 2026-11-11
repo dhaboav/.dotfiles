@@ -49,6 +49,13 @@ A lightweight, modular Bash CLI for managing applications and their configuratio
 - Manage custom application configurations and symlinks.
 - Extend functionality through independent package scripts.
 
+## Package Notes
+
+> **Note:** Refer to each package's official documentation for version-specific details. Installation scripts may be adapted to suit this repository.
+
+- **Noctalia:** v5.4.1 for Ubuntu 26.04 LTS — [Official Documentation](https://docs.noctalia.dev/noctalia/v5.4.1/getting-started/installation/?section=debian#debian).
+
+
 ## Disclaimer
 
 > This repository is intended for personal use. Review scripts and back up existing configurations before running them. Some operations may require administrator privileges or modify system settings.
