@@ -1,18 +1,22 @@
-# --- SETTINGS ---
+# === SETTINGS ===
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_SAVE_NO_DUPS
-eval "$(starship init zsh)"
 
-# --- ROS2 MODULE (Optional) ---
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+# === ROS2 MODULE (Optional) ===
 if [[ -f "$HOME/.zsh/.zsh_ros2" ]]; then
   source "$HOME/.zsh/.zsh_ros2"
 fi
 
-# --- ALIASES & PLUGINS ---
+# === ALIASES & PLUGINS ===
 alias ..="cd .."
 alias ...="cd ../.."
+alias reload="source ~/.zshrc"
 alias update="sudo apt update && sudo apt upgrade -y"
 
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh

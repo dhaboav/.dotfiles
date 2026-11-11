@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:05 A.M. (UTC)
+# Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:51 A.M. (UTC)
 
 #  === Package Metadata ===
 PACKAGE_NAME="JetBrainsNFM"
@@ -25,12 +25,12 @@ install() {
   echo "${BOLD}Installing JetBrainsMono NFM...${RESET}"
 
   if check_installation; then
-    info_label "Font is already installed. Skipping."
+    info_label "Font is already installed. Skipping"
     return 0
   fi
 
   tmp_dir=$(mktemp -d) || {
-    error_label "Could not create temporary directory."
+    error_label "Could not create temporary directory"
     return 1
   }
 
@@ -38,7 +38,7 @@ install() {
   stage_dir="$tmp_dir/fonts"
 
   mkdir -p "$stage_dir" || {
-    error_label "Could not create staging directory."
+    error_label "Could not create staging directory"
     rm -rf -- "$tmp_dir"
     return 1
   }
@@ -47,22 +47,22 @@ install() {
   info_label "Downloading font archive..."
 
   if ! wget -q --show-progress "$SOURCE_URL" -O "$archive"; then
-    error_label "Font download failed."
+    error_label "Font download failed"
     rm -rf -- "$tmp_dir"
     return 1
   fi
 
-  success_label "Font archive downloaded."
+  success_label "Font archive downloaded"
 
   # Validate archive
   info_label "Validating archive..."
 
   if ! unzip -tq "$archive" >/dev/null 2>&1; then
-    error_label "Downloaded archive is invalid."
+    error_label "Downloaded archive is invalid"
     rm -rf -- "$tmp_dir"
     return 1
   else
-    success_label "Archive validation passed."
+    success_label "Archive validation passed"
   fi
 
   # Extract fonts
@@ -71,13 +71,13 @@ install() {
   if ! unzip -q -j "$archive" \
     '*JetBrainsMonoNerdFontMono-*.ttf' \
     -d "$stage_dir"; then
-    error_label "Font extraction failed."
+    error_label "Font extraction failed"
     rm -rf -- "$tmp_dir"
     return 1
   fi
 
   if ! find "$stage_dir" -type f -name '*.ttf' -print -quit | grep -q .; then
-    error_label "No font files were found in the archive."
+    error_label "No font files were found in the archive"
     rm -rf -- "$tmp_dir"
     return 1
   fi
@@ -87,7 +87,7 @@ install() {
 
   if ! mkdir -p "$TARGET_DIR" ||
     ! cp -f "$stage_dir"/*.ttf "$TARGET_DIR/"; then
-    error_label "Could not copy font files into $TARGET_DIR."
+    error_label "Could not copy font files into $TARGET_DIR"
     rm -rf -- "$tmp_dir"
     return 1
   fi
@@ -96,7 +96,7 @@ install() {
   info_label "Refreshing font cache..."
 
   if ! fc-cache -f "$TARGET_DIR"; then
-    error_label "Failed to refresh font cache."
+    error_label "Failed to refresh font cache"
     rm -rf -- "$tmp_dir"
     return 1
   fi
@@ -105,18 +105,18 @@ install() {
 
   # Verify
   if ! check_installation; then
-    error_label "Installation completed, but font verification failed."
+    error_label "Installation completed, but font verification failed"
     return 1
   fi
 
-  success_label "Font installed successfully."
+  success_label "Font installed successfully"
 }
 
 uninstall() {
   echo "${BOLD}Uninstalling JetBrainsMono NFM...${RESET}"
 
   if [[ ! -d "$TARGET_DIR" ]]; then
-    info_label "Font is not installed. Nothing to remove."
+    info_label "Font is not installed. Nothing to remove"
     return 0
   fi
 
@@ -128,8 +128,8 @@ uninstall() {
 
 status() {
   if check_installation; then
-    success_label "JetBrainsMono NFM is installed."
+    success_label "JetBrainsMono NFM is installed"
   else
-    info_label "JetBrainsMono NFM is not installed."
+    info_label "JetBrainsMono NFM is not installed"
   fi
 }

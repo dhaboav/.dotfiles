@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="0.0.3"
+VERSION="0.0.4"
 
 # Directories
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -107,34 +107,34 @@ run_package() {
 
 # Main entry point
 case "${1:-}" in
-  --help | -h)
-    show_help
-    ;;
+--help | -h)
+  show_help
+  ;;
 
-  --version | -v)
-    show_version
-    ;;
+--version | -v)
+  show_version
+  ;;
 
-  --list | -L)
-    show_packages
-    ;;
+--list | -L)
+  show_packages
+  ;;
 
-  install | uninstall | status)
-    if [[ -z "${2:-}" ]]; then
-      show_error "Missing package name"
-      exit 1
-    fi
-
-    if [[ -n "${3:-}" ]]; then
-      show_error "Unexpected argument '${3}' found"
-      exit 1
-    fi
-
-    run_package "$1" "$2" || exit 1
-    ;;
-
-  *)
-    show_error "Unexpected argument '${1:-}' found"
+install | uninstall | status)
+  if [[ -z "${2:-}" ]]; then
+    show_error "Missing package name"
     exit 1
-    ;;
+  fi
+
+  if [[ -n "${3:-}" ]]; then
+    show_error "Unexpected argument '${3}' found"
+    exit 1
+  fi
+
+  run_package "$1" "$2" || exit 1
+  ;;
+
+*)
+  show_error "Unexpected argument '${1:-}' found"
+  exit 1
+  ;;
 esac
