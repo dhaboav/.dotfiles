@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Last updated: TUESDAY, 10 NOVEMBER 2026 04:19 P.M. (UTC)
+# Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:05 A.M. (UTC)
 
-# Package metadata
+#  === Package Metadata ===
 PACKAGE_NAME="JetBrainsNFM"
-PACKAGE_DESCRIPTION="JetBrainsMono NFM Font."
+PACKAGE_DESCRIPTION="JetBrainsMono NFM Font"
 
-# Configuration
+#  === Configuration ===
 TARGET_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/jetbrains-mono-nerd"
 SOURCE_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
 
-# Utility functions
-check() {
+#  === Utility functions ===
+check_installation() {
   [[ -d "$TARGET_DIR" ]] || return 1
 
   find "$TARGET_DIR" -type f -name '*.ttf' \
@@ -18,13 +18,13 @@ check() {
     grep -Fqi 'JetBrainsMono Nerd Font Mono'
 }
 
-# Core functions
+#  === Core functions ===
 install() {
   local tmp_dir archive stage_dir
 
   echo "${BOLD}Installing JetBrainsMono NFM...${RESET}"
 
-  if check; then
+  if check_installation; then
     info_label "Font is already installed. Skipping."
     return 0
   fi
@@ -104,7 +104,7 @@ install() {
   rm -rf -- "$tmp_dir"
 
   # Verify
-  if ! check; then
+  if ! check_installation; then
     error_label "Installation completed, but font verification failed."
     return 1
   fi
@@ -127,7 +127,7 @@ uninstall() {
 }
 
 status() {
-  if check; then
+  if check_installation; then
     success_label "JetBrainsMono NFM is installed."
   else
     info_label "JetBrainsMono NFM is not installed."

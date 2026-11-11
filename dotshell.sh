@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="0.0.2"
+VERSION="0.0.3"
 
 # Directories
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -25,7 +25,7 @@ ${BOLD_UNDERLINE}Commands:${RESET}
 ${BOLD_UNDERLINE}Options:${RESET}
   ${BOLD}-h, --help${RESET}     Print help
   ${BOLD}-v, --version${RESET}  Print version
-  ${BOLD}--list${RESET}         Print available packages
+  ${BOLD}-L, --list${RESET}         Print available packages
 
 EOF
 }
@@ -115,7 +115,7 @@ case "${1:-}" in
     show_version
     ;;
 
-  --list)
+  --list | -L)
     show_packages
     ;;
 
