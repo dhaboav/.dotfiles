@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:51 A.M. (UTC)
+# Last updated: WEDNESDAY, 11 NOVEMBER 2026 05:09 A.M. (UTC)
 
 # === Package Metadata ===
 PACKAGE_NAME="starship"
-PACKAGE_DESCRIPTION="Starship prompt with configuration."
+PACKAGE_DESCRIPTION="Starship prompt with configuration"
 
 # === Configuration ===
 STARSHIP_CONFIG="$HOME/.config/starship.toml"
