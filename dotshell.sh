@@ -2,11 +2,77 @@
 
 VERSION="1.0.0"
 
-# Directories
+#  === Directories ===
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 PACKAGE_DIR="$SCRIPT_DIR/packages"
-source "$SCRIPT_DIR/lib/utils.sh"
+source "$SCRIPT_DIR/lib/utils.sh" || exit 1
 
+#  === Utility functions ===
+read_metadata() {
+  local file="$1"
+  local key value
+
+  PACKAGE_NAME=""
+  PACKAGE_DESCRIPTION=""
+
+  while IFS='=' read -r key value || [[ -n "$key" ]]; do
+    value="${value%$'\r'}"
+
+    case "$key" in
+    PACKAGE_NAME)
+      PACKAGE_NAME="$value"
+      ;;
+    PACKAGE_DESCRIPTION)
+      PACKAGE_DESCRIPTION="$value"
+      ;;
+    esac
+  done <"$file"
+}
+
+run_package() {
+  local action="$1"
+  local package="$2"
+  local file name package_file
+
+  for file in "$PACKAGE_DIR"/*/metadata; do
+    [[ -f "$file" ]] || continue
+
+    read_metadata "$file"
+    name="${PACKAGE_NAME:-}"
+
+    if [[ "${name,,}" == "${package,,}" ]]; then
+      package_file="${file%/metadata}/package.sh"
+
+      [[ -f "$package_file" ]] || {
+        show_error "Package script for '$package' not found"
+        return 1
+      }
+
+      (
+        source "$package_file" || {
+          show_error "Failed to load package '$package'"
+          exit 1
+        }
+
+        if ! declare -F "$action" >/dev/null; then
+          show_error "Package '$name' does not support '$action'"
+          exit 1
+        fi
+
+        "$action"
+      )
+
+      return $?
+    fi
+  done
+
+  show_error "Package '$package' not found"
+  echo ""
+  show_packages
+  return 1
+}
+
+#  === Core functions ===
 show_version() {
   echo "dotshell ${VERSION}"
 }
@@ -21,37 +87,13 @@ ${BOLD_UNDERLINE}Commands:${RESET}
   ${BOLD}install${RESET}    Install a package
   ${BOLD}uninstall${RESET}  Remove a package
   ${BOLD}status${RESET}     Show package status
-  
+
 ${BOLD_UNDERLINE}Options:${RESET}
   ${BOLD}-h, --help${RESET}     Print help
   ${BOLD}-v, --version${RESET}  Print version
   ${BOLD}-L, --list${RESET}     Print available packages
 
 EOF
-}
-
-show_packages() {
-  local file package name description
-
-  echo "${BOLD_UNDERLINE}Packages:${RESET}"
-
-  for file in "$PACKAGE_DIR"/*.sh; do
-    [[ -f "$file" ]] || continue
-
-    package="${file##*/}"
-    package="${package%.sh}"
-
-    PACKAGE_NAME=""
-    PACKAGE_DESCRIPTION=""
-
-    source "$file"
-
-    name="${PACKAGE_NAME:-$package}"
-    description="${PACKAGE_DESCRIPTION:-No description available.}"
-
-    # Please change the spacing as needed to fit your terminal width
-    printf "  ${BOLD}%-13s${RESET} %s\n" "$name" "$description"
-  done
 }
 
 show_error() {
@@ -64,48 +106,27 @@ For more information, try '${BOLD}--help${RESET}'.
 EOF
 }
 
-# Execute package
-run_package() {
-  local action="$1"
-  local package="$2"
-  local package_file
+show_packages() {
+  local file package name description
 
-  for file in "$PACKAGE_DIR"/*.sh; do
+  echo "${BOLD_UNDERLINE}Packages:${RESET}"
+
+  for file in "$PACKAGE_DIR"/*/metadata; do
     [[ -f "$file" ]] || continue
 
-    PACKAGE_NAME=""
-    source "$file" || continue
+    package="${file%/metadata}"
+    package="${package##*/}"
 
-    if [[ "${PACKAGE_NAME,,}" == "${package,,}" ]]; then
-      package_file="$file"
-      break
-    fi
+    read_metadata "$file"
+
+    name="${PACKAGE_NAME:-$package}"
+    description="${PACKAGE_DESCRIPTION:-No description available.}"
+
+    printf "  ${BOLD}%-13s${RESET} %s\n" "$name" "$description"
   done
-
-  if [[ -z "$package_file" ]]; then
-    show_error "Package '$package' not found"
-    echo ""
-    show_packages
-    return 1
-  fi
-
-  # Load the selected package
-  source "$package_file" || {
-    show_error "Failed to load package '$package'"
-    return 1
-  }
-
-  # Check requested function
-  if ! declare -F "$action" >/dev/null; then
-    show_error "Package '$PACKAGE_NAME' does not support '$action'"
-    return 1
-  fi
-
-  # Execute package action
-  "$action"
 }
 
-# Main entry point
+#  === Main entry point ===
 case "${1:-}" in
 --help | -h)
   show_help

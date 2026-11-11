@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # Last updated: WEDNESDAY, 11 NOVEMBER 2026 05:09 A.M. (UTC)
 
-# === Package Metadata ===
-PACKAGE_NAME="fastfetch"
-PACKAGE_DESCRIPTION="Fastfetch with configuration"
-
 # === Configuration ===
 FASTFETCH_CONFIG="$HOME/.config/fastfetch/config.jsonc"
 FASTFETCH_SOURCE="$SCRIPT_DIR/config/fastfetch/config.jsonc"

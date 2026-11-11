@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:51 A.M. (UTC)
 
-#  === Package Metadata ===
-PACKAGE_NAME="zsh"
-PACKAGE_DESCRIPTION="Zsh shell with configuration and plugin support"
-
 #  === Configuration ===
 PLUGINS=(
   "zsh-users/zsh-history-substring-search"

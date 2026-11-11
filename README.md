@@ -53,7 +53,7 @@ A lightweight, modular Bash CLI for managing applications and their configuratio
 
 > **Note:** Refer to each package's official documentation for version-specific details. Installation scripts may be adapted to suit this repository.
 
-- **Niri:** v26.04 for Ubuntu 26.04 LTS — installed through the third-party [Dux Labs PPA](https://duxlabs.dev/docs/repo), following the [official Niri installation guide](https://niri-wm.github.io/niri/Getting-Started.html).
+- **Niri:** v26.04 for Ubuntu 26.04 LTS — Installed through the third-party [Dux Labs PPA](https://duxlabs.dev/docs/repo), following the [official Niri installation guide](https://niri-wm.github.io/niri/Getting-Started.html).
 
 - **Noctalia:** v5.4.1 for Ubuntu 26.04 LTS — [Official Documentation](https://docs.noctalia.dev/noctalia/v5.4.1/getting-started/installation/?section=debian#debian).
 

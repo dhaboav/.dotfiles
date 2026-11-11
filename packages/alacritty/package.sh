@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # Last updated: WEDNESDAY, 11 NOVEMBER 2026 01:22 P.M. (UTC)
 
-# === Package Metadata ===
-PACKAGE_NAME="alacritty"
-PACKAGE_DESCRIPTION="Alacritty terminal emulator with configuration"
-
 # === Configuration ===
 ALACRITTY_CONFIG="$HOME/.config/alacritty"
 ALACRITTY_SOURCE="$SCRIPT_DIR/config/alacritty"

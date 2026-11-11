@@ -3,10 +3,6 @@
 # Noctalia v5.4.1 | Ubuntu 26.04 LTS
 # Docs: https://docs.noctalia.dev/noctalia/v5.4.1/getting-started/installation/?section=debian#debian
 
-# === Package Metadata ===
-PACKAGE_NAME="noctalia"
-PACKAGE_DESCRIPTION="Noctalia v5.4.1 with configuration"
-
 # === Configuration ===
 NOCTALIA_CONFIG="$HOME/.config/noctalia"
 NOCTALIA_SOURCE="$SCRIPT_DIR/config/noctalia"

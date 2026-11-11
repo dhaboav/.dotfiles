@@ -4,10 +4,6 @@
 # Source: Third-party Dux Labs PPA (recommended by Niri)
 # Docs: Official https://niri-wm.github.io/niri/Getting-Started.html | Dux Labs https://duxlabs.dev/docs/repo
 
-# === Package Metadata ===
-PACKAGE_NAME="niri"
-PACKAGE_DESCRIPTION="Niri stable v26.04 compositor with configuration"
-
 # === Configuration ===
 NIRI_CONFIG="$HOME/.config/niri"
 NIRI_SOURCE="$SCRIPT_DIR/config/niri"

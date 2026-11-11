@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:51 A.M. (UTC)
 
-#  === Package Metadata ===
-PACKAGE_NAME="JetBrainsNFM"
-PACKAGE_DESCRIPTION="JetBrainsMono NFM Font"
-
 #  === Configuration ===
 TARGET_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fonts/jetbrains-mono-nerd"
 SOURCE_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
