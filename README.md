@@ -1,77 +1,54 @@
 # Dotfiles
 
-Automated setup scripts and configuration files for an Ubuntu-based Linux environment.
+My personal Linux configuration and setup repository, featuring application configurations, installation scripts, and system automation.
 
-## Compatibility
+Tested on **Ubuntu 26.04.1 LTS** with **Linux kernel 7.0.0-43-generic**. Configurations are tailored to this environment and may require adjustments on other systems.
 
-Tested on **Ubuntu 26.04.1 LTS (Resolute Raccoon)** with kernel **Linux 7.0.0-38-generic**.
+## Preview
 
-This setup is tailored to my environment and may require adjustments on other Ubuntu releases, Linux distributions, or kernel versions. Review the scripts and configurations before running them.
-
-## Showcase
-
-|       Desktop (Niri + DMS)       |  Terminal (Fastfetch + Starship)   |
-| :------------------------------: | :--------------------------------: |
+| Desktop — Niri + Noctalia | Terminal |
+|:---:|:---:|
 | ![Desktop](./assets/desktop.png) | ![Terminal](./assets/terminal.png) |
 
-## Components
+## Installation
 
-### 1. Core Environment
-
-Run `scripts/install_zsh.sh` to set up the terminal environment:
-
-- Zsh and Starship
-- Nerd Fonts
-- Zsh plugins
-- Configuration symlinks
-
-**Optional:** Install Fastfetch and apply the provided configuration using a symlink.
-
-### 2. Desktop Environment (Optional)
-
-To replicate my desktop setup, install [DMS](https://duxlabs.dev/docs/getting-started), Niri, and Alacritty by following the official installation instructions.
-
-Apply the provided Niri and Alacritty configurations, then restore the DMS configuration backup:
+Clone the repository:
 
 ```bash
-dms restore dms-backup-config
+git clone https://github.com/dhaboav/.dotfiles.git
+cd .dotfiles
 ```
 
-### 3. ROS 2 (Optional)
-
-Use the provided scripts to automate ROS 2 installation, workspace setup, or uninstallation.
-
-## Getting Started
-
-Clone the repository and run the core setup:
+Run the setup script:
 
 ```bash
-git clone https://github.com/dhaboav/dotfiles.git
-cd dotfiles
-
-chmod +x scripts/*.sh
-./scripts/install_zsh.sh
+chmod +x dotshell.sh
+./dotshell.sh
 ```
 
-Review scripts before running them. Log out and back in if required for shell changes to take effect.
-
-## Repository Structure
+View available commands:
+```bash
+./dotshell.sh --help
+```
+## Structure
 
 ```text
-.
-├── assets/     # Screenshots and other assets
-├── config/     # All customize application settings
-└── scripts/    # Installation and setup scripts
+├── assets/       # Screenshots and assets
+├── config/       # Custom configurations to use or adapt
+├── lib/          # Shared utilities and styles
+├── packages/     # Package installation scripts
+├── scripts/      # Additional scripts
+└── dotshell.sh   # Main CLI   
 ```
+## Dotshell
 
-## Available Scripts
+A lightweight, modular Bash CLI for managing applications and their configurations.
 
-| Script              | Description                                                       |
-| ------------------- | ----------------------------------------------------------------- |
-| `install_zsh.sh`    | Install and configure Zsh, Starship, plugins, and symlinks (Main) |
-| `install_font.sh`   | Install Nerd Fonts                                                |
-| `setup_plugins.sh`  | Clone and manage Zsh plugins                                      |
-| `install_ros2.sh`   | Install ROS 2 and initialize the workspace (standalone)           |
-| `uninstall_ros2.sh` | Uninstall ROS 2 packages and dependencies (standalone)            |
+- Install and uninstall packages.
+- Check package status.
+- Manage custom application configurations and symlinks.
+- Extend functionality through independent package scripts.
 
-> Note for install_font.sh && setup_plugins.sh are included in install_zsh.sh
+## Disclaimer
+
+> This repository is intended for personal use. Review scripts and back up existing configurations before running them. Some operations may require administrator privileges or modify system settings.
