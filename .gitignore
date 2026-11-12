@@ -1,1 +1,5 @@
 .vscode
+
+# Noctalia generated themes color
+config/alacritty/themes
+config/niri/noctalia.kdl

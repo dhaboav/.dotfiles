@@ -18,4 +18,4 @@ include "user/windowrules.kdl"
 
 // === NOCTALIA ===
 include "noctalia/binds.kdl"
-include "noctalia.kdl"
+include optional=true "noctalia.kdl"
