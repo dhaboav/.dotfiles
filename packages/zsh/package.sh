@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Last updated: WEDNESDAY, 11 NOVEMBER 2026 04:51 A.M. (UTC)
+# Last updated: THURSDAY, 12 NOVEMBER 2026 00:25 A.M. (UTC)
 
 #  === Configuration ===
 PLUGINS=(
@@ -7,10 +7,13 @@ PLUGINS=(
   "zsh-users/zsh-autosuggestions"
   "zsh-users/zsh-syntax-highlighting"
 )
-
 PLUGIN_DIR="$HOME/.zsh"
+
 ZSHRC="$HOME/.zshrc"
 ZSHRC_SOURCE="$SCRIPT_DIR/config/zsh/.zshrc"
+
+ZSH_INIT="$HOME/.zsh/init.zsh"
+ZSH_INIT_SOURCE="$SCRIPT_DIR/config/zsh/init.zsh"
 
 #  === Utility functions ===
 check_installation() {
@@ -31,11 +34,6 @@ check_plugins() {
   for repo in "${PLUGINS[@]}"; do
     [[ -d "$PLUGIN_DIR/${repo##*/}" ]] || return 1
   done
-}
-
-check_config() {
-  [[ -L "$ZSHRC" ]] &&
-    [[ "$(readlink -f "$ZSHRC")" == "$(readlink -f "$ZSHRC_SOURCE")" ]]
 }
 
 install_plugins() {
@@ -76,34 +74,72 @@ uninstall_plugins() {
   done
 }
 
+check_config() {
+  [[ -f "$ZSHRC" ]] &&
+    cmp -s "$ZSHRC_SOURCE" "$ZSHRC" &&
+    [[ -L "$ZSH_INIT" ]] &&
+    [[ "$(readlink -f "$ZSH_INIT")" == "$(readlink -f "$ZSH_INIT_SOURCE")" ]]
+}
+
 install_config() {
   local backup
 
-  if check_config; then
-    info_label ".zshrc is already configured. Skipping"
-    return 0
-  fi
+  [[ -f "$ZSHRC_SOURCE" ]] || {
+    error_label ".zshrc source file not found"
+    return 1
+  }
 
-  if [[ -e "$ZSHRC" || -L "$ZSHRC" ]]; then
-    if [[ -L "$ZSHRC" ]]; then
-      rm -- "$ZSHRC" || return 1
-    else
+  [[ -f "$ZSH_INIT_SOURCE" ]] || {
+    error_label "init.zsh source file not found"
+    return 1
+  }
+
+  mkdir -p "$HOME/.zsh" || return 1
+
+  # Configure .zshrc
+  if [[ -f "$ZSHRC" ]] && cmp -s "$ZSHRC_SOURCE" "$ZSHRC"; then
+    info_label ".zshrc is already configured. Skipping"
+  else
+    if [[ -e "$ZSHRC" || -L "$ZSHRC" ]]; then
       backup="$ZSHRC.backup.$(date +%Y%m%d-%H%M%S)"
       mv -- "$ZSHRC" "$backup" || return 1
       info_label "Existing .zshrc backed up to $(basename "$backup")"
     fi
+
+    cp -- "$ZSHRC_SOURCE" "$ZSHRC" || return 1
+    success_label ".zshrc copied successfully"
   fi
 
-  ln -s "$ZSHRC_SOURCE" "$ZSHRC" || return 1
-  success_label ".zshrc configured successfully"
+  # Configure init.zsh
+  if [[ -L "$ZSH_INIT" ]] &&
+    [[ "$(readlink -f "$ZSH_INIT")" == "$(readlink -f "$ZSH_INIT_SOURCE")" ]]; then
+    info_label "init.zsh is already linked. Skipping"
+  else
+    if [[ -e "$ZSH_INIT" || -L "$ZSH_INIT" ]]; then
+      backup="$ZSH_INIT.backup.$(date +%Y%m%d-%H%M%S)"
+      mv -- "$ZSH_INIT" "$backup" || return 1
+      info_label "Existing init.zsh backed up to $(basename "$backup")"
+    fi
+
+    ln -s "$ZSH_INIT_SOURCE" "$ZSH_INIT" || return 1
+    success_label "init.zsh linked successfully"
+  fi
 }
 
 uninstall_config() {
-  if check_config; then
+  if [[ -f "$ZSHRC" ]] && cmp -s "$ZSHRC_SOURCE" "$ZSHRC"; then
     rm -- "$ZSHRC" || return 1
-    success_label ".zshrc configuration removed"
+    success_label ".zshrc removed"
   else
-    info_label "No managed .zshrc configuration found. Skipping"
+    info_label "Managed .zshrc not found. Skipping"
+  fi
+
+  if [[ -L "$ZSH_INIT" ]] &&
+    [[ "$(readlink -f "$ZSH_INIT")" == "$(readlink -f "$ZSH_INIT_SOURCE")" ]]; then
+    rm -- "$ZSH_INIT" || return 1
+    success_label "init.zsh link removed"
+  else
+    info_label "Managed init.zsh link not found. Skipping"
   fi
 }
 

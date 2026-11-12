@@ -49,6 +49,21 @@ A lightweight, modular Bash CLI for managing applications and their configuratio
 - Manage custom application configurations and symlinks.
 - Extend functionality through independent package scripts.
 
+## Code Formatting
+
+Dotshell uses [shfmt](https://github.com/mvdan/sh) for consistent Bash formatting with 2-space indentation.
+
+**Check formatting:**
+
+```bash
+shfmt -i 2 -d dotshell.sh lib/*.sh packages/*/package.sh
+```
+
+**Automatically format files:**
+```bash
+shfmt -i 2 -w dotshell.sh lib/*.sh packages/*/package.sh
+```
+
 ## Package Notes
 
 > **Note:** Refer to each package's official documentation for version-specific details. Installation scripts may be adapted to suit this repository.

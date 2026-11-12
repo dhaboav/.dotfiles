@@ -2,14 +2,14 @@
 sidebar = "full"
 sidebar_section = "compact"
 hidden_tabs = [
-    "audio",
-    "monitor",
-    "system",
-    "power",
-    "network",
-    "bluetooth",
-    "weather",
-    "calendar",
+  "audio",
+  "monitor",
+  "system",
+  "power",
+  "network",
+  "bluetooth",
+  "weather",
+  "calendar",
 ]
 show_session_button = false
 show_shortcut_labels = false
