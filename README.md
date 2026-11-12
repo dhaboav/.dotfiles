@@ -36,7 +36,8 @@ View available commands:
 ├── assets/       # Screenshots and assets
 ├── config/       # Custom configurations to use or adapt
 ├── lib/          # Shared utilities and styles
-├── scripts/      # Additional scripts
+├── packages/     # Package installation scripts
+├── scripts/      # Standalone scripts for task automation
 └── dotshell.sh   # Main CLI   
 ```
 ## Dotshell
@@ -55,12 +56,12 @@ Dotshell uses [shfmt](https://github.com/mvdan/sh) for consistent Bash formattin
 **Check formatting:**
 
 ```bash
-shfmt -i 2 -d dotshell.sh lib/*.sh packages/*/package.sh
+shfmt -i 2 -d dotshell.sh lib/*.sh packages/*/package.sh scripts/*.sh
 ```
 
 **Automatically format files:**
 ```bash
-shfmt -i 2 -w dotshell.sh lib/*.sh packages/*/package.sh
+shfmt -i 2 -w dotshell.sh lib/*.sh packages/*/package.sh scripts/*.sh
 ```
 
 ## Package Notes
