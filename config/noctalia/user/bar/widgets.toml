@@ -52,13 +52,13 @@ show_tooltip = false
 glyph = "arrow-down"
 interactive = false
 network_speed_decimal_places = 0
-network_speed_unit = "kb"
+network_speed_unit = "mb"
 visualization = "none"
 
 [widget.network_tx]
 glyph = "arrow-up"
 interactive = false
-network_speed_unit = "kb"
+network_speed_unit = "mb"
 visualization = "none"
 
 # Audio

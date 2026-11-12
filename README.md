@@ -36,7 +36,6 @@ View available commands:
 ├── assets/       # Screenshots and assets
 ├── config/       # Custom configurations to use or adapt
 ├── lib/          # Shared utilities and styles
-├── packages/     # Package installation scripts
 ├── scripts/      # Additional scripts
 └── dotshell.sh   # Main CLI   
 ```
